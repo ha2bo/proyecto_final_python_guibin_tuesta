@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Sede
+from .models import Sede, usuarios
 
 # Create your views here.
 
@@ -45,4 +45,19 @@ def buscar(req):
         lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=" ") #no pone nada
     
     return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
+
+
+def registrar(req):
+
+    miFormulario = req.POST
+
+    if miFormulario:
+
+        data = miFormulario.dict()
+
+        nuevo_usuario = usuarios(nombre = data.get('NombreUsuario'), correo = data.get('CorreoUsuario'), Telefono = data.get('TelefonoUsuario') , Mensaje = data.get('ComentarioUsuarios'))
+        nuevo_usuario.save()
+
+    return render(req, 'index.html', {})
+    
 

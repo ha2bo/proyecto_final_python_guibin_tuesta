@@ -18,3 +18,13 @@ class Sede(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class usuarios(models.Model):
+    nombre = models.CharField(max_length=100)
+    correo = models.EmailField(null=True)
+    Telefono = models.CharField(max_length=100)
+    Mensaje = models.TextField(null= 'True')
+
+    def __str__(self):
+        return f"{self.nombre} - {self.correo}" 
