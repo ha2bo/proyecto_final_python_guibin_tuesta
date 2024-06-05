@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+{% load static %}
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Strong Canary Gym</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href=" {% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
+    rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href=" {% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href=" {% static 'css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body class="sub_page about_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="{% url 'inicio' %}">
+            <img src=" {% static 'images/canary.jpg' %} " alt="" />
+            <span>
+                Strong Canary Gym
+            </span>
+          </a>
+          <div class="contact_nav" id="">
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <img src=" {% static 'images/call.png' %}" alt="" />
+                  <span>Teléfono :+ 51 123456</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <img src=" {% static 'images/envelope.png' %}" alt="" />
+                  <span>samuel.guibin@gmail.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+    </header>
+    <!-- end header section -->
+
+    {% block contenidoQueCambia %} {% endblock contenidoQueCambia %}
+
+  <!-- info section -->
+
+  <section class="info_section layout_padding2-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <h6>
+            Strong Canary Gym
+          </h6>
+          <p>
+            Página web con template copiado y modificado con Django para aprobar el curso de Python de Coderhouse
+          </p>
+        </div>
+        <div class="col-md-2 offset-md-1">
+          <h6>
+            Menus
+          </h6>
+          <ul>
+            <li class="">
+              <a class="" href="{% url 'inicio' %}">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="">
+              <a class="" href=" {% url 'sobre' %}">Sobre nosotros </a>
+            </li>
+            <li class="">
+              <a class="" href="{% url 'sedes' %}">Sedes </a>
+            </li>
+            <li class="">
+              <a class="" href=" {% url 'contacto' %} ">Contáctanos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <h6>
+            Contáctanos
+          </h6>
+          <div class="info_link-box">
+            <a href="">
+              <img src="{% static 'images/location-white.png' %} " alt="">
+              <span> Lima, Peru</span>
+            </a>
+            <a href="">
+              <img src=" {% static 'images/call-white.png' %}" alt="">
+              <span>+51 12345678901</span>
+            </a>
+            <a href="mailto:samuel.guibin.com">
+              <img src=" {% static 'images/mail-white.png' %}" alt="">
+              <span> samuel.guibin@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section ">
+    <p>
+      &copy; 2019 All Rights Reserved. Design by
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+  <!-- footer section -->
+
+  <script type="text/javascript" src=" {% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src=" {% static 'js/bootstrap.js' %}"></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
+</body>
+
+</html>

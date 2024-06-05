@@ -1,0 +1,99 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+{% load static %}
+
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+      <div class="container">
+        <div class="custom_nav2">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex  flex-column flex-lg-row align-items-center">
+                <ul class="navbar-nav  ">
+                  <li class="nav-item ">
+                    <a class="nav-link" href=" {% url 'inicio' %} ">Inicio <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'sobre' %}">Sobre nosotros </a>
+                  </li>
+                  <li class="nav-item active"> <!-- activo -->
+                    <a class="nav-link" href=" {% url 'sedes' %}">Sedes </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'contacto' %}">Contáctanos</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+    <!-- end slider section -->
+
+  <!-- sedes section -->
+
+  <section class="service_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Nuestras sedes
+        </h2>
+      </div>
+      <p>Buscar sede:</p>
+      <form action=" {% url 'buscar_sede' %} " method="get">
+        <div class="contact_form-container">
+          <div>
+            <div>
+              <input type="text" placeholder="Sede: Prime/Classic/Plus" name = "tipoDeSede" />
+            </div>
+            <div class="mt-5">
+              <button type="submit">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="service_container">
+
+        {% for sede in ListaSede %}
+        <div class="box">
+          <img src= " {% static 'images/s-1.jpg' %} " alt="">
+          <h6 class="visible_heading">
+            {{sede.nombre}}
+          </h6>
+          <div class="link_box">
+            <h6>
+              {{sede.nombre}}
+            </h6>
+            <h6>
+              {{sede.direccion}}
+            </h6>
+            <h6>
+              {{sede.telefono}}
+            </h6>
+            <h6>
+              {{sede.tipo_gimnasio}}
+            </h6>
+
+          </div>
+        </div>
+        {% endfor %}
+          
+
+      </div>
+    </div>
+  </section>
+
+  <!-- end sedes section -->
+
+{% endblock contenidoQueCambia %}
+  
