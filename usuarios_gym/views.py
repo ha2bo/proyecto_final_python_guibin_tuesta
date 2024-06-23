@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Sede, usuarios_contactados
+from .models import Sede, usuarios_contactados, usuarios_gimnasio
+from .forms import UsuarioFormulario
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
@@ -73,23 +74,47 @@ def registrar(req):
 def usuario_nuevo(req):
 
     if req.method == 'POST':
-        miFormulario = UserCreationForm(req.POST)
 
-        if miFormulario.is_valid():
+        info = req.POST
+
+        miFormulario = UsuarioFormulario({
+            'nombre' : info['nombre'],
+            'correo' : info['correo'],
+            'Telefono' : info['Telefono'],
+        })
+
+        userform = UserCreationForm({
+            "username": info["username"],
+            "password1": info["password1"],
+            "password2": info["password2"],
+        })
+
+        #miFormulario = UserCreationForm(req.POST)
+
+        if miFormulario.is_valid() and userform.is_valid():
 
             data = miFormulario.cleaned_data
+            data.update(userform.cleaned_data)
 
-            usuario = data["username"]
-            miFormulario.save()
+            user = User(username=data["username"])
+            user.set_password(data["password1"])
+            user.save()
 
-            return render(req, "usuario_registrado.html", {"message": f"Usuario {usuario} creado con éxito!"})
+            nuevo_profesor = usuarios_gimnasio(nombre=data['nombre'], correo=data['correo'], Telefono=data['Telefono'],user_id=user)
+            nuevo_profesor.save()
+
+
+            return render(req, "usuario_registrado.html", {"message": f"Usuario {data['username']} creado con éxito!"})
     
         else:
+
+
             return render(req, "usuario_registrado.html", {"message": "Datos inválidos"}) #hacer un HTML de error 
   
     else:
 
-        miFormulario = UserCreationForm()
+        miFormulario = UsuarioFormulario()
+        userForm = UserCreationForm()
 
-        return render(req, "usuario_nuevo.html", {"miFormulario": miFormulario})
+        return render(req, "usuario_nuevo.html", {"miFormulario": miFormulario , "userForm": userForm})
 

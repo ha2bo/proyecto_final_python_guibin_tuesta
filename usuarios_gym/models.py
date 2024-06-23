@@ -30,3 +30,15 @@ class usuarios_contactados(models.Model):
 
     def __str__(self):
         return f"{self.nombre} - {self.correo}" 
+    
+
+
+class usuarios_gimnasio(models.Model):
+    nombre = models.CharField(max_length=100)
+    correo = models.EmailField(null=True)
+    Telefono = models.CharField(max_length=100, null=True)
+    user_id = models.OneToOneField(User, on_delete= models.CASCADE)
+    sede = models.ForeignKey(Sede, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.user_id} - {self.sede}" 
