@@ -1,0 +1,46 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+{% load static %}
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          <span>
+            Iniciar sesión
+          </span>
+        </h2>
+      </div>
+      <div class="layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6 ">
+
+            <form action="{% url 'Login' %}" method="post">{% csrf_token %}
+
+
+              {{miFormulario.as_p}}
+            
+              <button type="submit"> INGRESAR </button>
+            
+            </form>
+
+          </div>
+          <div class="col-md-6">
+            <div class="box">
+                <img src= " {% static 'images/callcenter.jpg' %} " alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
+
+
+{% endblock contenidoQueCambia %}
+  

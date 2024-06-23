@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -118,3 +119,35 @@ def usuario_nuevo(req):
 
         return render(req, "usuario_nuevo.html", {"miFormulario": miFormulario , "userForm": userForm})
 
+
+def login_view(req):
+
+  if req.method == 'POST':
+
+    miFormulario = AuthenticationForm(req, data=req.POST)
+
+    if miFormulario.is_valid():
+
+      data = miFormulario.cleaned_data
+
+      usuario = data["username"]
+      psw = data["password"]
+
+      user = authenticate(username=usuario, password=psw)
+
+      if user:
+        login(req, user)
+        return render(req, "index.html", {"message": f"Bienvenido {usuario}"}) #ver en el padre
+      
+      else:
+        return render(req, "usuario_registrado.html", {"message": "Datos erroneos"})
+    
+    else:
+
+      return render(req, "inicio.html", {"message": "Datos inválidos"})
+  
+  else:
+
+    miFormulario = AuthenticationForm()
+
+    return render(req, "login.html", {"miFormulario": miFormulario})
