@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -25,6 +26,7 @@ class usuarios(models.Model):
     correo = models.EmailField(null=True)
     Telefono = models.CharField(max_length=100)
     Mensaje = models.TextField(null=True)
+    user_id = models.OneToOneField(User, on_delete= models.CASCADE)
 
     def __str__(self):
         return f"{self.nombre} - {self.correo}" 
