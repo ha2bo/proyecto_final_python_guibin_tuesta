@@ -18,7 +18,7 @@ class Sede(models.Model):
         ], null= True)
 
     def __str__(self):
-        return self.name
+        return self.nombre
     
 
 class usuarios_contactados(models.Model):
