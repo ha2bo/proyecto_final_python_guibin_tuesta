@@ -24,12 +24,24 @@
                         <li class="nav-item">
                           <a class="nav-link" href=" {% url 'contacto' %}">Contáctanos</a>
                         </li>
+                        
+                        {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                          <form method="post" action="{% url 'Logout' %}"> {% csrf_token %}
+                            <button class="nav-link" type="submit">Cerrar Sesión</button>
+                        </li>
+                        {% else %}
+
                         <li class="nav-item">
                           <a class="nav-link" href=" {% url 'Login' %}">Login</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href=" {% url 'UsuarioRegistrado' %}">Registrarse</a>
                         </li>
+
+                        {% endif %}
+                          
                       </ul>
                 </div>
               </div>

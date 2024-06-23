@@ -58,6 +58,15 @@
                   <span>samuel.guibin@gmail.com</span>
                 </a>
               </li>
+              
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <span><strong>!HOLA {{user.username}}!</strong></span>
+                </a>
+              </li>
+              {% endif %}
+
             </ul>
           </div>
         </nav>
@@ -121,6 +130,7 @@
               <img src=" {% static 'images/mail-white.png' %}" alt="">
               <span> samuel.guibin@gmail.com</span>
             </a>
+            
           </div>
         </div>
       </div>
