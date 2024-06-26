@@ -1,4 +1,3 @@
-
 # Strong Canary Gym - Django Project
 
 ## Descripción
