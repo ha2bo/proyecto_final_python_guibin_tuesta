@@ -11,7 +11,7 @@
       <div class="heading_container">
         <h2>
           <span>
-            Iniciar sesión
+            Tu perfil
           </span>
         </h2>
       </div>
@@ -19,19 +19,20 @@
         <div class="row">
           <div class="col-md-6 ">
 
-            <form action="{% url 'Login' %}" method="post">{% csrf_token %}
-
+            <form action="{% url 'EditarPerfil' %}" method="post">{% csrf_token %}
 
               {{miFormulario.as_p}}
             
-              <button type="submit"> INGRESAR  </button>
+              <button type="submit"> Guardar </button>
             
-            </form>
-
+            </form>      
+            <button>
+              <a href="{% url 'editarcontrasena' %}"> Actualizar contraseña </a>
+            </button>
           </div>
           <div class="col-md-6">
             <div class="box">
-                <img src= " {% static 'images/callcenter.jpg' %} " alt="">
+                <img src= " {% static 'images/canary.jpg' %} " alt="">
               </div>
             </div>
           </div>

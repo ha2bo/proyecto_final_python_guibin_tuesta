@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Sede, usuarios_contactados, usuarios_gimnasio
-from .forms import UsuarioFormulario
+from .forms import UsuarioFormulario, UserEditForm, UserEditForm_password
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
@@ -80,6 +80,7 @@ def usuario_nuevo(req):
 
         miFormulario = UsuarioFormulario({
             'nombre' : info['nombre'],
+            'apellido' : info['apellido'],
             'correo' : info['correo'],
             'Telefono' : info['Telefono'],
         })
@@ -97,11 +98,12 @@ def usuario_nuevo(req):
             data = miFormulario.cleaned_data
             data.update(userform.cleaned_data)
 
-            user = User(username=data["username"])
+            user = User(username=data["username"], first_name = data['nombre'], last_name = data['apellido'], email = data['correo'])
+
             user.set_password(data["password1"])
             user.save()
 
-            nuevo_profesor = usuarios_gimnasio(nombre=data['nombre'], correo=data['correo'], Telefono=data['Telefono'],user_id=user)
+            nuevo_profesor = usuarios_gimnasio(nombre=data['nombre'], apellido = data['apellido'] ,correo=data['correo'], Telefono=data['Telefono'],user_id=user)
             nuevo_profesor.save()
 
 
@@ -144,10 +146,81 @@ def login_view(req):
     
     else:
 
-      return render(req, "inicio.html", {"message": "Datos inválidos"})
+      return render(req, "usuario_registrado.html", {"message": "Datos inválidos"})
   
   else:
 
     miFormulario = AuthenticationForm()
 
     return render(req, "login.html", {"miFormulario": miFormulario})
+  
+
+def editar_perfil(req):
+
+  usuario = req.user
+
+
+  if req.method == 'POST':
+
+
+    miFormulario = UserEditForm(req.POST, instance=req.user)
+
+    if miFormulario.is_valid():
+
+      data = miFormulario.cleaned_data
+
+      usuario.first_name = data["first_name"]
+      usuario.last_name = data["last_name"]
+
+      perfil_editado = usuarios_gimnasio.objects.get(user_id_id= req.user.id)
+      perfil_editado.nombre = data['first_name']
+      perfil_editado.apellido = data['last_name']
+      perfil_editado.correo = data['email']
+
+      usuario.save()
+      perfil_editado.save()
+
+      return render(req, "usuario_registrado.html", {"message": "Datos actualizado con éxito"})
+    
+    else:
+
+      return render(req, "usuario_registrado.html", {"message": "Datos erroneos"})
+  
+  else:
+
+    miFormulario = UserEditForm(instance=req.user)
+
+    return render(req, "editar_perfil.html", {"miFormulario": miFormulario})
+  
+
+def editar_contrasena(req):
+
+  usuario = req.user
+
+  if req.method == 'POST':
+
+    miFormulario = UserEditForm_password(req.POST, instance=req.user)
+
+    if miFormulario.is_valid():
+
+      data = miFormulario.cleaned_data
+      usuario.first_name = data["first_name"]
+      usuario.last_name = data["last_name"]
+      usuario.email = data["email"]
+      usuario.set_password(data["password1"])
+      usuario.save()
+
+      return render(req, "usuario_registrado.html", {"message": "Datos actualizado con éxito"})
+    
+    else:
+
+      return render(req, "usuario_registrado.html", {"message": "Contranseñas diferentes"})
+  
+  else:
+
+    miFormulario = UserEditForm_password(instance=req.user)
+
+    return render(req, "editar_contrasena.html", {"miFormulario": miFormulario})
+  
+
+
