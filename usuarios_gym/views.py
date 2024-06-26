@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Sede, usuarios_contactados, usuarios_gimnasio
-from .forms import UsuarioFormulario, UserEditForm, UserEditForm_password
+from .forms import UsuarioFormulario, UserEditForm, UserEditForm_password, UsuarioFormularioSede
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
@@ -159,23 +159,34 @@ def editar_perfil(req):
 
   usuario = req.user
 
-
   if req.method == 'POST':
 
+    info = req.POST
 
+    Sedeformulario = UsuarioFormularioSede({
+       'sede' : info['sede'],
+    })
+
+    
     miFormulario = UserEditForm(req.POST, instance=req.user)
+   # print(miFormulario)
 
-    if miFormulario.is_valid():
+    if miFormulario.is_valid() and Sedeformulario.is_valid():
 
       data = miFormulario.cleaned_data
+      data.update(Sedeformulario.cleaned_data)
 
       usuario.first_name = data["first_name"]
       usuario.last_name = data["last_name"]
+      usuario.email = data["email"]
 
       perfil_editado = usuarios_gimnasio.objects.get(user_id_id= req.user.id)
       perfil_editado.nombre = data['first_name']
       perfil_editado.apellido = data['last_name']
       perfil_editado.correo = data['email']
+      perfil_editado.sede = data['sede']
+
+      #print(perfil_editado)
 
       usuario.save()
       perfil_editado.save()
@@ -189,8 +200,14 @@ def editar_perfil(req):
   else:
 
     miFormulario = UserEditForm(instance=req.user)
+    perfil_editado = usuarios_gimnasio.objects.get(user_id_id= req.user.id)
+    sede_id = perfil_editado.sede
 
-    return render(req, "editar_perfil.html", {"miFormulario": miFormulario})
+    #print(sede_id)
+
+    sedeUsuario = UsuarioFormularioSede(initial={'sede': sede_id})
+
+    return render(req, "editar_perfil.html", {"miFormulario": miFormulario , "misedeFormulario": sedeUsuario})
   
 
 def editar_contrasena(req):
@@ -198,29 +215,57 @@ def editar_contrasena(req):
   usuario = req.user
 
   if req.method == 'POST':
+ #   print('aHHHHHHHHHHHHHHHHHHHHHHH')
+
+    info = req.POST
+
+    Sedeformulario = UsuarioFormularioSede({
+       'sede' : info['sede'],
+    })
 
     miFormulario = UserEditForm_password(req.POST, instance=req.user)
 
-    if miFormulario.is_valid():
+    if miFormulario.is_valid() and Sedeformulario.is_valid():
 
       data = miFormulario.cleaned_data
+      data.update(Sedeformulario.cleaned_data)
+
       usuario.first_name = data["first_name"]
       usuario.last_name = data["last_name"]
       usuario.email = data["email"]
+
+      perfil_editado = usuarios_gimnasio.objects.get(user_id_id= req.user.id)
+      perfil_editado.nombre = data['first_name']
+      perfil_editado.apellido = data['last_name']
+      perfil_editado.correo = data['email']
+      perfil_editado.sede = data['sede']
+
       usuario.set_password(data["password1"])
       usuario.save()
 
-      return render(req, "usuario_registrado.html", {"message": "Datos actualizado con éxito"})
+      logout(req)
+
+      return render(req, "usuario_registrado.html", {"message": "Contraseña actualizada. Has sido deslogueado, vuelve a ingresar"})
     
     else:
+      
 
       return render(req, "usuario_registrado.html", {"message": "Contranseñas diferentes"})
   
   else:
 
+    #print("GET")
+
     miFormulario = UserEditForm_password(instance=req.user)
 
-    return render(req, "editar_contrasena.html", {"miFormulario": miFormulario})
+    perfil_editado = usuarios_gimnasio.objects.get(user_id_id= req.user.id)
+    sede_id = perfil_editado.sede
+
+    #print(sede_id)
+
+    sedeUsuario = UsuarioFormularioSede(initial={'sede': sede_id})
+
+    return render(req, "editar_contrasena.html", {"miFormulario": miFormulario, "misedeFormulario": sedeUsuario})
   
 
 

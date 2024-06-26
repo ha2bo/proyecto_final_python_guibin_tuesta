@@ -22,6 +22,7 @@
             <form action="{% url 'EditarPerfil' %}" method="post">{% csrf_token %}
 
               {{miFormulario.as_p}}
+              {{misedeFormulario.as_p}}
             
               <button type="submit"> Guardar </button>
             

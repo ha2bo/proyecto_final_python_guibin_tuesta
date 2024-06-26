@@ -18,10 +18,11 @@
       <div class="layout_padding2-top">
         <div class="row">
           <div class="col-md-6 ">
-
-            <form action="{% url 'EditarPerfil' %}" method="post">{% csrf_token %}
+            <p> Al cambiar la contraseña tendrá que iniciar sesión nuevamente</p>
+            <form action="{% url 'editarcontrasena' %}" method="post">{% csrf_token %}
 
               {{miFormulario.as_p}}
+              {{misedeFormulario.as_p}}
             
               <button type="submit"> Actualizar </button>
             
