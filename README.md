@@ -1,5 +1,3 @@
-# ESTIMADO TUTOR, AUN ME FALTA TERMINAR UNAS COSITAS
-
 # Strong Canary Gym - Django Project
 
 ## Descripción
