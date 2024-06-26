@@ -62,7 +62,13 @@
               {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="">
-                  <span><strong>!HOLA {{user.username}}!</strong></span>
+                  <span><strong>Hola {{user.username}}</strong></span>
+                  
+                  {% if user.is_staff %}
+                  <span><strong>ADMINISTRADOR</strong></span>
+                    
+                  {% endif %}
+                    
                 </a>
               </li>
               {% endif %}

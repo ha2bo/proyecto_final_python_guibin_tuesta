@@ -1,0 +1,69 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+{% load static %}
+
+
+  <!-- sedes section -->
+
+  <section class="service_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Usuarios Registrados
+        </h2>
+      </div>
+      <p>Buscar usuario:</p>
+      <form action=" {% url 'buscar_usuarios' %} " method="get">
+        <div class="contact_form-container">
+          <div>
+            <div>
+              <input type="text" placeholder="Nombre" name = "usuario_buscado" />
+            </div>
+            <div class="mt-5">
+              <button type="submit">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="service_container">
+
+        {% for usuario in UsuarioLista %}
+        <div class="box">
+          <img src= " {% static 'images/s-1.jpg'  %} " alt="">
+          <h6 class="visible_heading">
+            {{usuario.user_id}}
+          </h6>
+          <div class="link_box">
+            <h6>
+              {{usuario.nombre}}
+            </h6>
+            <h6>
+              {{usuario.apellido}}
+            </h6>
+            <h6>
+              {{usuario.correo}}
+            </h6>
+            <h6>
+              {{usuario.Telefono}}
+            </h6>
+            <h6>
+              {{usuario.sede}}
+            </h6>
+
+          </div>
+        </div>
+        {% endfor %}
+          
+
+      </div>
+    </div>
+  </section>
+
+  <!-- end sedes section -->
+
+{% endblock contenidoQueCambia %}
+  

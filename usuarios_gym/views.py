@@ -42,6 +42,14 @@ def sedes(req):
 
     return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
 
+def lista_usuarios(req):
+
+    usuarios_lista = usuarios_gimnasio.objects.all()
+
+    print(usuarios_lista)
+
+    return render(req, 'lista_usuarios.html', {'UsuarioLista' : usuarios_lista})
+
 
 def buscar(req):
 
@@ -50,13 +58,22 @@ def buscar(req):
         tipo_de_sede = req.GET["tipoDeSede"]
         lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=tipo_de_sede)
 
-        
-
     else:
         lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=" ") #no pone nada
     
     return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
 
+def buscar_usuarios(req):
+
+    if req.GET["usuario_buscado"]:
+        
+        usuario_buscado = req.GET['usuario_buscado']
+        print(usuario_buscado)
+        lista_usarios = usuarios_gimnasio.objects.filter(nombre__icontains = usuario_buscado)
+    else:
+        lista_usarios = usuarios_gimnasio.objects.filter(nombre__icontains = " ") #no pone nada
+    
+    return render(req, 'lista_usuarios.html', {'UsuarioLista' : lista_usarios})
 
 def registrar(req):
 
@@ -154,7 +171,7 @@ def login_view(req):
 
     return render(req, "login.html", {"miFormulario": miFormulario})
   
-
+@login_required
 def editar_perfil(req):
 
   usuario = req.user
@@ -209,7 +226,7 @@ def editar_perfil(req):
 
     return render(req, "editar_perfil.html", {"miFormulario": miFormulario , "misedeFormulario": sedeUsuario})
   
-
+@login_required
 def editar_contrasena(req):
 
   usuario = req.user
@@ -267,5 +284,4 @@ def editar_contrasena(req):
 
     return render(req, "editar_contrasena.html", {"miFormulario": miFormulario, "misedeFormulario": sedeUsuario})
   
-
 

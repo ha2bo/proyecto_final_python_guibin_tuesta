@@ -21,9 +21,20 @@
                         <li class="nav-item">
                           <a class="nav-link" href=" {% url 'sedes' %}">Sedes </a>
                         </li>
+                        
+                        {% if user.is_staff %}
+
                         <li class="nav-item">
-                          <a class="nav-link" href=" {% url 'contacto' %}">Contáctanos</a>
-                        </li>
+                          <a class="nav-link" href=" {% url 'listausuarios' %}">Usuarios</a>
+                        </li>    
+                          
+                        {% else %}
+                      
+                      <li class="nav-item">
+                        <a class="nav-link" href=" {% url 'contacto' %}">Contáctanos</a>
+                      </li>
+
+                        {% endif %}
                         
                         {% if user.is_authenticated %}
 
@@ -46,6 +57,7 @@
                         </li>
 
                         {% endif %}
+                          
                           
                       </ul>
                 </div>
