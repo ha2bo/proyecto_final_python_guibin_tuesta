@@ -23,7 +23,7 @@
             </div>
             <div class="mt-5">
               <button type="submit">
-                Send
+                Buscar
               </button>
             </div>
           </div>
@@ -33,7 +33,7 @@
 
         {% for sede in ListaSede %}
         <div class="box">
-          <img src= " {% static 'images/s-1.jpg'  %} " alt="">
+          <img src= " {{sede.imagen.url}} " alt="">
           <h6 class="visible_heading">
             {{sede.nombre}}
           </h6>

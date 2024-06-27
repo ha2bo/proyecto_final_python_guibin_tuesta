@@ -5,6 +5,14 @@
 
 {% load static %}
 
+<style>
+  .fixed-size {
+      width: 321px;
+      height: 321px;
+      object-fit: cover;
+  }
+</style>
+
   <!-- contact section -->
   <section class="contact_section layout_padding">
     <div class="container">
@@ -44,9 +52,9 @@
           </div>
           <div class="col-md-6">
             <div class="box">
-                <img src= " {% static 'images/callcenter.jpg' %} " alt="">
-              </div>
+                <img src="{% static 'images/callcenter.jpg' %}" alt="" class="fixed-size">
             </div>
+        </div>
           </div>
         </div>
       </div>

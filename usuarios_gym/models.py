@@ -8,7 +8,7 @@ class Sede(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=200)
     telefono = models.CharField(max_length=20)
-    imagen = models.ImageField(upload_to='usuarios_gym/static/images/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='sedes', null=True, blank=True)
     tipo_gimnasio = models.CharField(
         max_length=10,
         choices=[

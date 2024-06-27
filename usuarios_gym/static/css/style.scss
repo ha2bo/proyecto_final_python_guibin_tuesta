@@ -121,7 +121,6 @@ body {
 
 }
 
-
 .header_section {
     background-color: $btnWhite;
 
@@ -391,6 +390,12 @@ a:focus {
 
 
     }
+}
+
+.fixed-size {
+    width: 321px;
+    height: 321px;
+    object-fit: cover; /* Asegura que la imagen se recorte para llenar el espacio */
 }
 
 // end about section

@@ -86,7 +86,7 @@ def registrar(req):
         nuevo_usuario = usuarios_contactados(nombre = data.get('NombreUsuario'), correo = data.get('CorreoUsuario'), Telefono = data.get('TelefonoUsuario') , Mensaje = data.get('ComentarioUsuarios'))
         nuevo_usuario.save()
 
-    return render(req, 'usuario_registrado.html', {'NombreUsuario' : data.get('NombreUsuario')})
+    return render(req, 'usuario_registrado.html', {'message' : 'Nos comunicaremos contigo pronto'})
     
 
 def usuario_nuevo(req):

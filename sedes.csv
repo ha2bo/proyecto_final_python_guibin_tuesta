@@ -1,0 +1,9 @@
+id,nombre,direccion,telefono,tipo_gimnasio,imagen
+1,El trebol,"Av. Javier Prado Este 3616, San Borja",905 453 190,classic,usuarios_gym/static/images/trebol.jpeg
+2,Barranco,"Av. Almirante Grau 709-715, Barranco",905 453 167,plus,usuarios_gym/static/images/FACHADA_BARRANCO.jpg
+3,Miraflores,"Av. Roosevelt 6409, Miraflores",905 453 283,prime,usuarios_gym/static/images/MIRAFLORES-01.jpg
+4,Chacarilla,"C.C Caminos Del Inca, Local 315, 3er piso - Santiago de Surco",905 453 260,prime,usuarios_gym/static/images/CHACARILLA-01.jpg
+5,Jesus Maria,"Centro Comercial San Felipe - Local 79, Jesús María",905 453 084,plus,usuarios_gym/static/images/JESÚS-MARÍA-01.jpg
+6,Pardo La Alameda,"Av. José Pardo 399, Miraflores. Ref. La Alameda & Hacienda Club",905 452 998,plus,usuarios_gym/static/images/FACHADA_PARDO.jpg
+7,San Miguel,"Av. La Marina 2500, San Miguel (Ref. 2do. Piso de Metro La Marina)",905 453 249,plus,usuarios_gym/static/images/COLONIAL-01_GkZRXXa.jpg
+8,Colonial,"Av. Óscar R. Benavides 3002, Cercado de Lima",905 453 219,classic,usuarios_gym/static/images/COLONIAL-01_SaqsaAY.jpg
