@@ -7,6 +7,14 @@
 
   <!-- sedes section -->
 
+  <style>
+    .fixed-size {
+        width: 321px;
+        height: 321px;
+        object-fit: cover;
+    }
+  </style>
+
   <section class="service_section layout_padding">
     <div class="container">
       <div class="heading_container">
@@ -50,8 +58,15 @@
             <h6>
               {{sede.tipo_gimnasio}}
             </h6>
-
+            
+            {% if user.is_staff %}
+            <h6>
+              <a href="{% url 'DetalleSede' sede.id %}">Editar</a>
+            </h6>
+            {% endif %}
+            
           </div>
+
         </div>
         {% endfor %}
           

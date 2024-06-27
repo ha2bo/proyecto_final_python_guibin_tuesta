@@ -5,7 +5,15 @@
 {% load static %}
 
 
-  <!-- sedes section -->
+  <!-- usuarios section -->
+
+  <style>
+    .fixed-size {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+  </style>
 
   <section class="service_section layout_padding">
     <div class="container">
@@ -14,7 +22,7 @@
           Usuarios Registrados
         </h2>
       </div>
-      <p>Buscar usuario:</p>
+      <p>Buscar usuario por nombre:</p>
       <form action=" {% url 'buscar_usuarios' %} " method="get">
         <div class="contact_form-container">
           <div>
@@ -33,7 +41,7 @@
 
         {% for usuario in UsuarioLista %}
         <div class="box">
-          <img src= " {% static 'images/s-1.jpg'  %} " alt="">
+          <img src= " {% static 'images/avatar.jpg'  %} " alt="" class="fixed-size">
           <h6 class="visible_heading">
             {{usuario.user_id}}
           </h6>

@@ -34,13 +34,6 @@ def contacto(req):
 
     return render(req, 'contact.html', {})
 
-def sedes(req):
-
-    lista_sedes = Sede.objects.all()
-
-    #print(lista_sedes)
-
-    return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
 
 def lista_usuarios(req):
 
@@ -285,3 +278,27 @@ def editar_contrasena(req):
     return render(req, "editar_contrasena.html", {"miFormulario": miFormulario, "misedeFormulario": sedeUsuario})
   
 
+
+def sedes(req):
+
+    lista_sedes = Sede.objects.all()
+
+    #print(lista_sedes)
+
+    return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
+
+
+class SedeDetail(DetailView):
+
+  model = Sede
+  template_name = 'sede_detail.html'
+  context_object_name = "sede"
+
+
+class SedeUpdate(UpdateView):
+
+  model = Sede
+  template_name = 'sede_detail.html'
+  fields = ('__all__')
+  success_url = "/user/sedes/"
+  context_object_name = "sede"

@@ -1,0 +1,43 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+
+{% load static %}
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          <span>
+            Informacion de Sede
+          </span>
+        </h2>
+      </div>
+      <div class="layout_padding2-top">
+        <div class="row">
+          <div class="col-md-6 ">
+
+            <form action="{% url 'DetalleSede' sede.id %}" method= "post">{% csrf_token %}
+                {{form.as_p}}
+              <button type="submit"> Guardar </button>     
+            </form>   
+
+            <button>
+              <a href="{% url 'sedes' %}"> Cancelar </a>
+            </button>
+
+          </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
+
+
+{% endblock contenidoQueCambia %}
+  
