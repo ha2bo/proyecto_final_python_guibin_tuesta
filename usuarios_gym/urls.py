@@ -15,19 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import inicio, contacto, sobre_nosotros, sedes, buscar, registrar,usuario_nuevo, login_view, editar_perfil, editar_contrasena, lista_usuarios, buscar_usuarios, SedeUpdate, SedeDelete, SedeCreate
+from .views import inicio, contacto, sobre_nosotros, sedes, buscar, registrar, usuario_nuevo, login_view, editar_perfil, editar_contrasena, lista_usuarios, buscar_usuarios, SedeUpdate, SedeDelete, SedeCreate
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
-    path('editar_perfil/', editar_perfil, name= 'EditarPerfil'),
-    path('inicio/', inicio, name= 'inicio'),
-    path('sedes/', sedes, name= 'sedes'),
-    path('about/', sobre_nosotros, name= 'sobre'),
-    path('contacto/', contacto, name= 'contacto'),
-    path('sedes_resultado/', buscar, name= 'buscar_sede'),
-    path('contacto_registrado/', registrar, name= 'ContactoRegistrado'),
-    path('registro/', usuario_nuevo, name= 'UsuarioRegistrado'),
+    path('editar_perfil/', editar_perfil, name='EditarPerfil'),
+    path('inicio/', inicio, name='inicio'),
+    path('sedes/', sedes, name='sedes'),
+    path('about/', sobre_nosotros, name='sobre'),
+    path('contacto/', contacto, name='contacto'),
+    path('sedes_resultado/', buscar, name='buscar_sede'),
+    path('contacto_registrado/', registrar, name='ContactoRegistrado'),
+    path('registro/', usuario_nuevo, name='UsuarioRegistrado'),
     path('login/', login_view, name='Login'),
     path('logout/', LogoutView.as_view(template_name="logout.html"), name='Logout'),
     path('editar_contrasena/', editar_contrasena, name='editarcontrasena'),

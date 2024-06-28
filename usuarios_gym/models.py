@@ -15,31 +15,29 @@ class Sede(models.Model):
             ('prime', 'Prime'),
             ('plus', 'Plus'),
             ('classic', 'Classic'),
-        ], null= True)
+        ], null=True)
 
     def __str__(self):
         return self.nombre
-    
+
 
 class usuarios_contactados(models.Model):
     nombre = models.CharField(max_length=100)
     correo = models.EmailField(null=True)
     Telefono = models.CharField(max_length=100)
     Mensaje = models.TextField(null=True)
-#    user_id = models.OneToOneField(User, on_delete= models.CASCADE)
 
     def __str__(self):
-        return f"{self.nombre} - {self.correo}" 
-    
+        return f"{self.nombre} - {self.correo}"
 
 
 class usuarios_gimnasio(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     correo = models.EmailField(null=True)
-    Telefono = models.CharField(max_length=100, null= True)
-    user_id = models.OneToOneField(User, on_delete= models.CASCADE)
+    Telefono = models.CharField(max_length=100, null=True)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     sede = models.ForeignKey(Sede, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.user_id} - {self.sede}" 
+        return f"{self.user_id} - {self.sede}"

@@ -1,5 +1,13 @@
 # Strong Canary Gym - Django Project
 
+## Alumno
+
+TEOFILO SAMUEL GUIBIN TUESTA
+
+## Video explicativo
+
+Link: https://youtu.be/AHXYCeY9bYQ
+
 ## Descripción
 
 Bienvenido al proyecto de la página web de **Strong Canary Gym**, un gimnasio que se destaca por ofrecer diferentes categorías de servicios para satisfacer las necesidades de nuestros clientes. Este proyecto ha sido desarrollado utilizando el framework Django.
@@ -29,7 +37,6 @@ Sigue los siguientes pasos para configurar el proyecto en tu máquina local:
     pipenv shell
     ```
 
-
 4. Instala las dependencias del proyecto:
     ```bash
     pip install -r requirements.txt
@@ -52,17 +59,41 @@ Sigue los siguientes pasos para configurar el proyecto en tu máquina local:
 
 ## Uso
 
+### Usuario staff
+Usuario: coder
+Contrasena: Coderhouse1!
+
 ### Inicio
 La página de inicio muestra la información del estudiante desarrollador del proyecto.
 
 ### Sobre Nosotros
-En esta sección se proporciona información completa sobre el gimnasio, incluyendo su historia, misión, visión y valores.
+En esta sección se proporciona información sobre el estudiante
 
 ### Sedes
 Aquí se listan todas las sedes del gimnasio. Los usuarios pueden filtrar las sedes según las categorías: Prime, Classic, y Plus.
 
 ### Contáctanos
 En esta sección, los usuarios pueden llenar un formulario con su nombre, teléfono, email y un comentario o consulta que deseen hacer.
+
+## Permisos
+
+### Modo usuario
+#### Mi cuenta
+
+El usuario puede editar solo su propia información (Correo, Nombre, Apellido, Sede, Contraseña)
+
+### Modo administrador
+#### Sedes
+
+Se puede editar informacion de las sedes, asi como agregar sedes o eliminar
+
+#### Usuarios
+
+Permite buscar a los usuarios registrados por su nombre
+
+## Pruebas
+
+El test case de pruebas lo puede hallar en: Pruebas_Guibin_Tuesta.xlsx
 
 ## Contribución
 
