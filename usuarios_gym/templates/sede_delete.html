@@ -13,7 +13,7 @@
       <div class="heading_container">
         <h2>
           <span>
-            Informacion de Sede
+            SEDE ACTUAL: {{sede.nombre}}
           </span>
         </h2>
       </div>
@@ -21,11 +21,10 @@
         <div class="row">
           <div class="col-md-6 ">
 
-            <form action="{% url 'DetalleSede' sede.id %}" method= "post" enctype="multipart/form-data">{% csrf_token %}
-                {{form.as_p}}
-              <button type="submit"> Guardar </button>     
+            <form action="{% url 'EliminarSede' sede.id %}" method= "post">{% csrf_token %}
+              <p>Está seguro que desea eliminar la sede?</p>
+              <button type="submit"> Confirmar </button>     
             </form>   
-
             <button>
               <a href="{% url 'sedes' %}"> Cancelar </a>
             </button>

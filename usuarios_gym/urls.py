@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import inicio, contacto, sobre_nosotros, sedes, buscar, registrar,usuario_nuevo, login_view, editar_perfil, editar_contrasena, lista_usuarios, buscar_usuarios, SedeDetail, SedeUpdate
+from .views import inicio, contacto, sobre_nosotros, sedes, buscar, registrar,usuario_nuevo, login_view, editar_perfil, editar_contrasena, lista_usuarios, buscar_usuarios, SedeUpdate, SedeDelete, SedeCreate
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -34,8 +34,6 @@ urlpatterns = [
     path('lista_usuarios/', lista_usuarios, name='listausuarios'),
     path('buscar_usuarios/', buscar_usuarios, name='buscar_usuarios'),
     path('editar_sede/<pk>', SedeUpdate.as_view(), name='DetalleSede'),
-    
-
-    
-
+    path('eliminar_sede/<pk>', SedeDelete.as_view(), name='EliminarSede'),
+    path('crear_sede/', SedeCreate.as_view(), name='CrearSede'),
 ]

@@ -9,10 +9,23 @@
 
   <style>
     .fixed-size {
-        width: 321px;
+        width: 547px;
         height: 321px;
         object-fit: cover;
     }
+
+    .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #fd9e2e;
+            border: none;
+            border-radius: 4px;
+        }
   </style>
 
   <section class="service_section layout_padding">
@@ -37,11 +50,31 @@
           </div>
         </div>
       </form>
+      
+      {% if user.is_staff %}
+
+      <div class="contact_form-container">
+        <a href="{% url 'CrearSede' %}" class="btn">Crear sede</a>
+      </div>
+        
+      {% endif %}
+        
+
+
+
       <div class="service_container">
 
         {% for sede in ListaSede %}
         <div class="box">
-          <img src= " {{sede.imagen.url}} " alt="">
+          
+          {% if sede.imagen %}
+          <img src= " {{sede.imagen.url}} " alt="" class="fixed-size">
+          {% else %}
+
+          <img src= "{% static 'images/s-1.jpg' %}" alt="" class="fixed-size">
+            
+          {% endif %}
+          
           <h6 class="visible_heading">
             {{sede.nombre}}
           </h6>
@@ -63,6 +96,10 @@
             <h6>
               <a href="{% url 'DetalleSede' sede.id %}">Editar</a>
             </h6>
+            <h6>
+              <a href="{% url 'EliminarSede' sede.id %}">Eliminar</a>
+            </h6>
+
             {% endif %}
             
           </div>

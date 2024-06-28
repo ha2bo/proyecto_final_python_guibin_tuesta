@@ -9,6 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.admin.views.decorators import staff_member_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
@@ -34,7 +35,7 @@ def contacto(req):
 
     return render(req, 'contact.html', {})
 
-
+@staff_member_required
 def lista_usuarios(req):
 
     usuarios_lista = usuarios_gimnasio.objects.all()
@@ -45,17 +46,23 @@ def lista_usuarios(req):
 
 
 def buscar(req):
-
-    if req.GET["tipoDeSede"]:
-
-        tipo_de_sede = req.GET["tipoDeSede"]
-        lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=tipo_de_sede)
-
-    else:
-        lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=" ") #no pone nada
     
-    return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
+    try:
 
+      if req.GET["tipoDeSede"]:
+
+          tipo_de_sede = req.GET["tipoDeSede"]
+          lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=tipo_de_sede)
+
+      else:
+          lista_sedes =  Sede.objects.filter(tipo_gimnasio__icontains=" ") #no pone nada
+      
+      return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
+
+    except:
+      return render(req, "usuario_registrado.html", {"message": "Error 404 - Acceso no autorizado"})
+
+@staff_member_required
 def buscar_usuarios(req):
 
     if req.GET["usuario_buscado"]:
@@ -122,7 +129,7 @@ def usuario_nuevo(req):
         else:
 
 
-            return render(req, "usuario_registrado.html", {"message": "Datos inválidos"}) #hacer un HTML de error 
+            return render(req, "usuario_registrado.html", {"message": "Datos inválidos"}) 
   
     else:
 
@@ -260,7 +267,7 @@ def editar_contrasena(req):
     else:
       
 
-      return render(req, "usuario_registrado.html", {"message": "Contranseñas diferentes"})
+      return render(req, "usuario_registrado.html", {"message": "Contraseñas diferentes"})
   
   else:
 
@@ -287,14 +294,14 @@ def sedes(req):
 
     return render(req, 'sedes.html', {'ListaSede' : lista_sedes})
 
-
+@method_decorator(staff_member_required, name='dispatch')
 class SedeDetail(DetailView):
 
   model = Sede
   template_name = 'sede_detail.html'
   context_object_name = "sede"
 
-
+@method_decorator(staff_member_required, name='dispatch')
 class SedeUpdate(UpdateView):
 
   model = Sede
@@ -302,3 +309,19 @@ class SedeUpdate(UpdateView):
   fields = ('__all__')
   success_url = "/user/sedes/"
   context_object_name = "sede"
+
+@method_decorator(staff_member_required, name='dispatch')
+class SedeDelete(DeleteView):
+
+  model = Sede  
+  template_name = 'sede_delete.html'
+  success_url = "/user/sedes/"
+  context_object_name = "sede"
+
+@method_decorator(staff_member_required, name='dispatch')
+class SedeCreate(CreateView):
+
+  model = Sede
+  template_name = 'sede_create.html'
+  fields = ('__all__')
+  success_url = "/user/sedes/"
